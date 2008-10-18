@@ -3,8 +3,8 @@
 Summary: X MultiMedia System input plugin to play Windows Media Audio files
 Name: xmms-wma
 Version: 1.0.5
-Release: 4%{?dist}
-License: GPL
+Release: 5%{?dist}
+License: GPLv2+
 Group: Applications/Multimedia
 URL: http://mcmcc.bat.ru/xmms-wma/
 Source: http://mcmcc.bat.ru/xmms-wma/xmms-wma-%{version}.tar.bz2
@@ -21,7 +21,7 @@ Tag informations are converted from unicode to your system locale.
 
 
 %prep
-%setup
+%setup -q
 %patch -p1 -b .build
 
 
@@ -39,14 +39,18 @@ Tag informations are converted from unicode to your system locale.
 
 
 %files
-%defattr(-, root, root, 0755)
+%defattr(-, root, root, -)
 %lang(ru) %doc readme.rus
 %doc COPYING readme.eng
 %{xmms_inputdir}/libwma.so
 
 
 %changelog
-* Sat Oct 18 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 1.0.5-4
+* Sat Oct 18 2008 Orcan Ogetbil <orcanbahri AT yahoo Dot com> 1.0.5-5
+- Minor spec file improvements.
+- License is GPLv2+.
+
+* Sat Oct 18 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.0.5-4
 - rebuild for RPM Fusion
 
 * Mon Apr 10 2006 Matthias Saou <http://freshrpms.net/> 1.0.5-3
