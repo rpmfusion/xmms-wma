@@ -3,7 +3,7 @@
 Summary: X MultiMedia System input plugin to play Windows Media Audio files
 Name: xmms-wma
 Version: 1.0.5
-Release: 5%{?dist}
+Release: 5.1%{?dist}
 License: GPLv2+
 Group: Applications/Multimedia
 URL: http://mcmcc.bat.ru/xmms-wma/
@@ -24,9 +24,9 @@ Tag informations are converted from unicode to your system locale.
 %setup -q
 %patch -p1 -b .build
 
-
 %build
-%{__make} %{?_smp_mflags} OPTFLAGS="%{optflags} -finline-functions"
+%{__make} %{?_smp_mflags} OPTFLAGS="%{optflags} -fPIC -fomit-frame-pointer -ffast-math"
+#OPTFLAGS="%{optflags} -finline-functions -I/usr/include/ffmpeg/libavcodec -I/usr/include/ffmpeg/libavformat -I/usr/include/ffmpeg/libavutil"
 
 
 %install
