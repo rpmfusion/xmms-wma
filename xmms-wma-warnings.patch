@@ -1,0 +1,25 @@
+diff -up xmms-wma-1.0.5/iir.c.warn xmms-wma-1.0.5/iir.c
+--- xmms-wma-1.0.5/iir.c.warn	2004-03-03 21:25:31.000000000 +0100
++++ xmms-wma-1.0.5/iir.c	2009-03-31 22:06:43.000000000 +0200
+@@ -58,8 +58,8 @@ void init_iir()
+ 	iir_cf = iir_cforiginal10;
+ 
+ 	/* Zero the history arrays */
+-	bzero(data_history, sizeof(sXYData) * EQ_MAX_BANDS * EQ_CHANNELS);
+-	bzero(data_history2, sizeof(sXYData) * EQ_MAX_BANDS * EQ_CHANNELS);
++	memset(data_history, 0, sizeof(sXYData) * EQ_MAX_BANDS * EQ_CHANNELS);
++	memset(data_history2, 0, sizeof(sXYData) * EQ_MAX_BANDS * EQ_CHANNELS);
+ }
+ 
+ __inline__ int iir(gpointer * d, gint length)
+diff -up xmms-wma-1.0.5/iir.h.warn xmms-wma-1.0.5/iir.h
+--- xmms-wma-1.0.5/iir.h.warn	2005-09-05 14:44:22.000000000 +0200
++++ xmms-wma-1.0.5/iir.h	2009-03-31 22:07:18.000000000 +0200
+@@ -22,6 +22,7 @@
+ #ifndef IIR_H
+ #define IIR_H
+ 
++#define _XOPEN_SOURCE 600
+ #include <stdio.h>
+ #if 0
+ #include <gtk/gtk.h>

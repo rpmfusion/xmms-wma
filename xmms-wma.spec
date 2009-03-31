@@ -3,14 +3,19 @@
 Summary: X MultiMedia System input plugin to play Windows Media Audio files
 Name: xmms-wma
 Version: 1.0.5
-Release: 5.1%{?dist}
+Release: 6%{?dist}
 License: GPLv2+
 Group: Applications/Multimedia
 URL: http://mcmcc.bat.ru/xmms-wma/
 Source: http://mcmcc.bat.ru/xmms-wma/xmms-wma-%{version}.tar.bz2
-Patch: xmms-wma-1.0.5-build.patch
+Patch0: xmms-wma-1.0.5-build.patch
+# fix FFmpeg API usage
+Patch1: %{name}-ffmpeg.patch
+# fix a couple of warnings
+Patch2: %{name}-warnings.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: xmms-devel, gtk+-devel
+BuildRequires: ffmpeg-devel
 
 %description
 X MultiMedia System input plugin to play Windows Media Audio, aka WMA files.
@@ -22,7 +27,9 @@ Tag informations are converted from unicode to your system locale.
 
 %prep
 %setup -q
-%patch -p1 -b .build
+%patch0 -p1 -b .build
+%patch1 -p1 -b .ff
+%patch2 -p1 -b .warn
 
 %build
 %{__make} %{?_smp_mflags} OPTFLAGS="%{optflags} -fPIC -fomit-frame-pointer -ffast-math"
@@ -46,6 +53,12 @@ Tag informations are converted from unicode to your system locale.
 
 
 %changelog
+* Tue Mar 31 2009 Dominik Mierzejewski <rpm AT greysector Dot net> 1.0.5-6
+- use Patch0 instead of Patch
+- fix build with current FFmpeg
+- fix FFmpeg API usage
+- fix some gcc warnings
+
 * Sat Oct 18 2008 Orcan Ogetbil <orcanbahri AT yahoo Dot com> 1.0.5-5
 - Minor spec file improvements.
 - License is GPLv2+.
